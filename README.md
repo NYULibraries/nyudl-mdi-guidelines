@@ -54,8 +54,8 @@ This is a work in progress.
 * Producers send a processing request message to a direct exchange
 * Workers receive message from queue
 * Workers perform task
-* Workers `ACK` message
 * Workers send results to topic exchange
+* Workers `ACK` message
 
 ## Worker subscriptions
 * subscribe to direct exchange
