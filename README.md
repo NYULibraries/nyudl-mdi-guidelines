@@ -53,7 +53,7 @@ This is a work in progress.
 * Workers
   * subscribe to a direct exchange
   * prefetch = 1
-  * must `ACK` message after work complete
   * must send results to topic exchange
+  * must `ACK` message after work complete
 
 ----
