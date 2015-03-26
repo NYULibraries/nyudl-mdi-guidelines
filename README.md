@@ -18,7 +18,7 @@ This is a work in progress.
 * question
 * prototype
 * avoid premature optimization
-  * slow and correct is better than fast and wrong
+  * *slow and correct is better than fast and wrong*
 * iterative development
   * exercise full toolchain
     * Github + Travis + Jenkins + TBD for monitoring
