@@ -43,7 +43,7 @@ This is a work in progress.
 * Producers send a processing request message to a direct exchange
 * Workers receive message from queue
 * Workers perform task
-* Workers ACK message
+* Workers `ACK` message
 * Workers send results to topic exchange
 
 ## Worker subscriptions
@@ -53,7 +53,7 @@ This is a work in progress.
 * Workers
   * subscribe to a direct exchange
   * prefetch = 1
-  * must ACK messages after work complete
+  * must `ACK` message after work complete
   * must send results to topic exchange
 
 ----
