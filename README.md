@@ -44,7 +44,7 @@ This is a work in progress.
 |field | example values |
 |-----|-----|
 |`app`      | `rstar` |
-| `service` | `xip_validation`, `file_identify`, `file_virus_scan`, `file_chz`, `file_video_xcode`...|
+| `service` | `xip_validation`, `file_identify`, <br>`file_virus_scan`, `file_chz`, <br>`file_video_xcode`...|
 | `message type` | `request`, `result`, `status` |
 | `reference id` | `c9aebc65-e90b-43fc-b776-e52399e77223` |
 
