@@ -17,7 +17,7 @@ This is a work in progress.
 * learn
 * question
 * prototype
-* avoid pre-mature optimization
+* avoid premature optimization
   * slow and correct is better than fast and wrong
 * iterative development
   * exercise full toolchain
