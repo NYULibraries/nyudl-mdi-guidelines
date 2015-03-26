@@ -39,6 +39,17 @@ This is a work in progress.
   * `video transcoding:   rstar.video_xcode.req.3b7d3a3f-f4ea-408c-aedc-ba2e06471da4`
   * `file identification: rstar.file_identify.res.c9aebc65-e90b-43fc-b776-e52399e77223`
 
+  * examples:
+
+|field | example values |
+|-----|-----|
+|`app`      | `rstar` |
+| `service` | `xip_validation`, `file_identify`, `file_virus_scan`, `file_chz`, `file_video_xcode`...|
+| `message type` | `request`, `result`, `status` |
+| `reference id` | `c9aebc65-e90b-43fc-b776-e52399e77223` |
+
+
+
 ## Messaging Pattern
 * Producers send a processing request message to a direct exchange
 * Workers receive message from queue
