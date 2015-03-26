@@ -51,11 +51,11 @@ This is a work in progress.
 
 
 ## Messaging Pattern
-* Producers send a processing request message to a direct exchange
-* Workers receive message from queue
-* Workers perform task
-* Workers send results to topic exchange
-* Workers `ACK` message
+* Producer sends a processing request message to a direct exchange
+* Worker receives message from queue
+* Worker performs task
+* Worker publishes result to topic exchange
+* Worker `ACK`s message
 
 ## Worker subscriptions
 * subscribe to direct exchange
