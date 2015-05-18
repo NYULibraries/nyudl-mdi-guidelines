@@ -33,18 +33,26 @@ This is a work in progress.
 * direct
 * topic
 
+## Binding template
+* `<app>.<service>.<message type>`
+  * `bag validation      : rstar.xip_validate.request`
+  * `video transcoding   : rstar.video_xcode.request`
+  * `file identification : rstar.file_identify.request`
+  * `event logger        : rstar.*.result`
+  * `jobs database       : rstar.#`
+
 ## Routing Key template
-* `<app>.<service>.<message type>.<producer reference id>`
-  * `bag validation:      rstar.xip_validate.request.b78bc9bf-77a1-4d16-95ef-23d1d75b060f`
-  * `video transcoding:   rstar.video_xcode.req.3b7d3a3f-f4ea-408c-aedc-ba2e06471da4`
-  * `file identification: rstar.file_identify.res.c9aebc65-e90b-43fc-b776-e52399e77223`
+* `<app>.<service>.<message type>`
+  * `bag validation:      rstar.xip_validate.request`
+  * `video transcoding:   rstar.video_xcode.request`
+  * `file identification: rstar.file_identify.result`
 
   * examples:
 
-|field | example values |
-|-----|-----|
-|`app`      | `rstar` |
-| `service` | `xip_validation`, `file_identify`, <br>`file_virus_scan`, `file_chz`, <br>`file_video_xcode`...|
+|field           | example values |
+|----------------|----------------|
+|`app`           | `rstar` |
+| `service`      | `xip_validation`, `file_identify`, <br>`file_virus_scan`, `file_chz`, <br>`file_video_xcode`...|
 | `message type` | `request`, `result`, `status` |
 | `reference id` | `c9aebc65-e90b-43fc-b776-e52399e77223` |
 
