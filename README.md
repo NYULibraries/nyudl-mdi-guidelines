@@ -33,43 +33,54 @@ This is a work in progress.
 * direct
 * topic
 
-## Binding template
-* `<app>.<service>.<message type>`
-  * `bag validation      : rstar.xip_validate.request`
-  * `video transcoding   : rstar.video_xcode.request`
-  * `file identification : rstar.file_identify.request`
-  * `event logger        : rstar.*.result`
-  * `jobs database       : rstar.#`
+## Routing and Binding templates
 
-## Routing Key template
-* `<app>.<service>.<message type>`
-  * `bag validation:      rstar.xip_validate.request`
-  * `video transcoding:   rstar.video_xcode.request`
-  * `file identification: rstar.file_identify.result`
-
-  * examples:
-
-|field           | example values |
+#### `key` Components
+| component      | example values |
 |----------------|----------------|
 |`app`           | `rstar` |
 | `service`      | `xip_validation`, `file_identify`, <br>`file_virus_scan`, `file_chz`, <br>`file_video_xcode`...|
 | `message type` | `request`, `result`, `status` |
-| `reference id` | `c9aebc65-e90b-43fc-b776-e52399e77223` |
 
+
+#### Routing Key Template
+##### `<app>.<service>.<message type>`
+| service             | role     | routing key                   |
+|---------------------|----------|-------------------------------|
+| bag validation      | producer | `rstar.xip_validate.request`  |
+| video transcoding   | producer | `rstar.video_xcode.request`   |
+| file identification | producer | `rstar.file_identify.request` |
+|                     |          |                               |
+| bag validation      | consumer | `rstar.xip_validate.result`   |
+| video transcoding   | consumer | `rstar.video_xcode.result`    |
+| file identification | consumer | `rstar.file_identify.result`  |
+
+
+#### Binding Key Template
+##### `<app>.<service>.<message type>`
+| service             | role     | binding key                   |
+|---------------------|----------|-------------------------------|
+| event logger        | consumer | `rstar.*.result`              |
+| jobs database       | consumer | `rstar.#`                     |
+| bag validation      | consumer | `rstar.xip_validate.request`  |
+| video transcoding   | consumer | `rstar.video_xcode.request`   |
+| file identification | consumer | `rstar.file_identify.request` |
 
 
 ## Messaging Pattern
-* Producer sends a processing request message to a direct exchange
-* Worker receives message from queue
-* Worker performs task
-* Worker publishes result to topic exchange
-* Worker `ACK`s message
+0. Producer publishes a request message to a direct exchange  
+   using the appropriate consumer routing key
+0. Message broker routes message to matching consumer queue(s)
+0. Consumer receives message from queue
+0. Consumer performs task
+0. Consumer publishes result to **topic** exchange
+0. Consumer `ACK`s message
 
-## Worker subscriptions
+## Consumer subscriptions
 * subscribe to direct exchange
 
 ## Queue attributes
-* Workers
+* Consumers
   * subscribe to a direct exchange
   * prefetch = 1
   * must send results to topic exchange
