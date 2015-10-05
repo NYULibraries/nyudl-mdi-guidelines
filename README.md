@@ -11,7 +11,7 @@ This is a work in progress.
 
 
 ## Version
-0.0.1-alpha
+0.1.0
 
 ## Approach
 * learn
@@ -30,7 +30,6 @@ This is a work in progress.
 * durable
 
 ## Exchange Types in scope
-* direct
 * topic
 
 ## Routing and Binding templates
