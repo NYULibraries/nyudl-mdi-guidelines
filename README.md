@@ -7,11 +7,10 @@ learn more about developing with, deploying, running, and monitoring a
 Message Driven Infrastructure (MDI).
 
 ## Status
-This is a work in progress.
-
+Under Development
 
 ## Version
-0.1.0
+0.1.0-alpha
 
 ## Approach
 * learn
@@ -32,56 +31,57 @@ This is a work in progress.
 ## Exchange Types in scope
 * topic
 
-## Routing and Binding templates
+## Routing Key and Binding Key Template
+#### `<service code>.<message type>[.<result code>]`
 
-#### `key` Components
-| component      | example values |
-|----------------|----------------|
-| `service`      | `xip_validation`, `file_identify`, <br>`file_virus_scan`, `file_chz`, <br>`file_video_xcode`...|
-| `message type` | `request`, `result`, `status` |
-
-
-#### Routing Key Template
-##### `<app>.<service>.<message type>`
-| service             | role     | routing key                   |
-|---------------------|----------|-------------------------------|
-| bag validation      | producer | `xip_validate.request`  |
-| video transcoding   | producer | `video_xcode.request`   |
-| file identification | producer | `file_identify.request` |
-|                     |          |                               |
-| bag validation      | consumer | `xip_validate.result`   |
-| video transcoding   | consumer | `video_xcode.result`    |
-| file identification | consumer | `file_identify.result`  |
+#### Template Components:
+| Component | Required? | Description |
+|-----------|-----------|-------------|
+| `service code` | YES | A value from the **Service Code Controlled Vocabulary** (see below) |
+| `message type` | YES | A value from the **Message Type Controlled Vocabulary** (see below) |
+| `result code` | no | A value from the **Result Code Controlled Vocabulary** (see below) |
 
 
-#### Binding Key Template
-##### `<app>.<service>.<message type>`
-| service             | role     | binding key                   |
-|---------------------|----------|-------------------------------|
-| event logger        | consumer | `*.result`              |
-| jobs database       | consumer | `#`                     |
-| bag validation      | consumer | `xip_validate.request`  |
-| video transcoding   | consumer | `video_xcode.request`   |
-| file identification | consumer | `file_identify.request` |
+###### Template Usage Examples
+| Message Routing Key Examples  |
+|-------------------------------|
+|`deriv_gen.request`            |
+|`e01verify.response.success`   |
+|`e01verify.response.failure`   |
+|`bag_validation.status`        |  
+
+
+| Queue Binding Key Examples | Use Case              |
+|---------------------------|-----------------------|
+| `*.response.*`            | event logger          |
+| `#`                       | jobs database         |
+| `bag_validation.request`  | bag validation worker |
+| `deriv_gen.request`       | derivative generation worker |
+| `e01verify.request`       | E01 verify worker  |
+
 
 
 ## Messaging Pattern
-0. Producer publishes a request message to a direct exchange  
-   using the appropriate consumer routing key
-0. Message broker routes message to matching consumer queue(s)
+0. Message Consumer (usually a Service) subscribes to the topic exchange using   
+   the appropriate binding key.  
+0. Message Producer (typically a Requestor) publishes a message to the topic  
+   exchange using the routing key for the desired service.
+0. Message broker routes message to all matching message queue(s)
 0. Consumer receives message from queue
+0. Consumer may send out `status` messages during processing, e.g., when a   
+   service starts work on a request it may sends a `status` of 'busy'
 0. Consumer performs task
-0. Consumer publishes result to **topic** exchange
-0. Consumer `ACK`s message
+0. Consumer publishes response message to the topic exchange
+0. Consumer `ACK`s request message
 
 ## Consumer subscriptions
-* subscribe to direct exchange
+* subscribe to **topic** exchange with very selective binding key
 
 ## Queue attributes
 * Consumers
-  * subscribe to a direct exchange
+  * must subscribe to the topic exchange using the correct binding key
   * prefetch = 1
-  * must send results to topic exchange
-  * must `ACK` message after work complete
+  * must send responses to the topic exchange
+  * must `ACK` request messages after work complete
 
 ----
