@@ -37,7 +37,6 @@ This is a work in progress.
 #### `key` Components
 | component      | example values |
 |----------------|----------------|
-|`app`           | `rstar` |
 | `service`      | `xip_validation`, `file_identify`, <br>`file_virus_scan`, `file_chz`, <br>`file_video_xcode`...|
 | `message type` | `request`, `result`, `status` |
 
@@ -46,24 +45,24 @@ This is a work in progress.
 ##### `<app>.<service>.<message type>`
 | service             | role     | routing key                   |
 |---------------------|----------|-------------------------------|
-| bag validation      | producer | `rstar.xip_validate.request`  |
-| video transcoding   | producer | `rstar.video_xcode.request`   |
-| file identification | producer | `rstar.file_identify.request` |
+| bag validation      | producer | `xip_validate.request`  |
+| video transcoding   | producer | `video_xcode.request`   |
+| file identification | producer | `file_identify.request` |
 |                     |          |                               |
-| bag validation      | consumer | `rstar.xip_validate.result`   |
-| video transcoding   | consumer | `rstar.video_xcode.result`    |
-| file identification | consumer | `rstar.file_identify.result`  |
+| bag validation      | consumer | `xip_validate.result`   |
+| video transcoding   | consumer | `video_xcode.result`    |
+| file identification | consumer | `file_identify.result`  |
 
 
 #### Binding Key Template
 ##### `<app>.<service>.<message type>`
 | service             | role     | binding key                   |
 |---------------------|----------|-------------------------------|
-| event logger        | consumer | `rstar.*.result`              |
-| jobs database       | consumer | `rstar.#`                     |
-| bag validation      | consumer | `rstar.xip_validate.request`  |
-| video transcoding   | consumer | `rstar.video_xcode.request`   |
-| file identification | consumer | `rstar.file_identify.request` |
+| event logger        | consumer | `*.result`              |
+| jobs database       | consumer | `#`                     |
+| bag validation      | consumer | `xip_validate.request`  |
+| video transcoding   | consumer | `video_xcode.request`   |
+| file identification | consumer | `file_identify.request` |
 
 
 ## Messaging Pattern
