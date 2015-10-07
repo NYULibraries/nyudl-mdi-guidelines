@@ -25,6 +25,7 @@ Under Development
 <br>
 ## Exchange Attributes
 * `durable`: the exchange must be `durable`
+* `rstar_topic` : the topic exchange name is `rstar_topic`
 
 <br>
 ## Exchange Types in scope
